@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 
 // Load environment variables from .env file
@@ -41,6 +41,7 @@ async function run() {
       const parcels = await parcelCollection.find().toArray();
       res.send(parcels);
     });
+
     // parcels api
     // GET: All parcels OR parcels by user (created_by), sorted by latest
     app.get('/parcels', async (req, res) => {
@@ -73,6 +74,7 @@ async function run() {
       }
     });
 
+   
     app.delete('/parcels/:id', async (req, res) => {
       try {
         const id = req.params.id;
